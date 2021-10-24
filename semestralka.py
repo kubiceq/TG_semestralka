@@ -13,6 +13,7 @@ try:
 except ImportError:
   print ("Trying to Install required module: matplotlib\n")
   os.system('python -m pip install -U matplotlib')
+from tabulate import tabulate
 
 
 #legenda
@@ -34,15 +35,50 @@ Graf_z_ulohy_1 = nx.Graph()
 
 #matica susednosti
 #????????????????????????????????????????????????????????????????????
+#kubqo
 matica_susednosti = np.array([[0,0,0,0,1,0,0,0],
                               [0,0,0,1,0,1,0,0],
                               [1,0,0,0,0,1,0,1],
                               [0,0,0,0,0,0,0,1],
                               [0,0,1,1,0,0,0,1],
-                              [0,0,0,1,0,0,1,1,],
+                              [0,0,0,1,0,0,1,1],
                               [0,1,0,1,1,0,0,0],
                               [1,0,0,0,0,0,0,0]])
+
+# #FLO
+# matica_susednosti = np.array([[0,0,0,1,1,0,1,1],
+#                               [0,0,1,0,1,1,1,0],
+#                               [0,1,0,0,0,1,1,0],
+#                               [1,0,0,0,1,0,0,1],
+#                               [1,1,0,1,0,1,0,1],
+#                               [0,1,1,0,1,0,0,1],
+#                               [1,1,1,0,0,0,0,1],
+#                               [1,0,0,1,1,1,1,0]])
+
+# #LJ
+# matica_susednosti = np.array([[0,1,0,0,1,0,1,0],
+#                               [1,0,1,0,1,0,1,0],
+#                               [0,1,0,1,0,1,1,1],
+#                               [0,0,1,0,1,1,0,1],
+#                               [1,1,0,1,0,1,0,1],
+#                               [0,0,1,1,1,0,0,0],
+#                               [1,1,1,0,0,0,0,1],
+#                               [0,0,1,1,1,0,1,0]])
+
+# #ty
+# matica_susednosti = np.array([[],
+#                               [],
+#                               [],
+#                               [],
+#                               [],
+#                               [],
+#                               [],
+#                               []])
 #????????????????????????????????????????????????????????????????????
+# tabulate data
+table = tabulate(matica_susednosti, tablefmt="fancy_grid")
+print('************************MATICA_SUSEDNOSTI****************************')
+print(table)
 #vytvorenie grafu z matice susednosti
 Graf_z_ulohy_1 = nx.from_numpy_matrix(matica_susednosti)
 #nakresli graf z ulohy 1
@@ -89,13 +125,14 @@ print('#*********************************************Uloha_2********************
 nV = 6
 #????????????????????????????????????????????????????????????????????
 INF = 9999
-
+print('Velke cisla v matici predstavuju nekonecno')
+print('Zadanie == Stupen 0')
 # Algorithm
 def floyd(G):
     dist = list(map(lambda p: list(map(lambda q: q, p)), G))
-
     # Adding vertices individually
     for r in range(nV):
+        print("Stupen(D)",r)
         for p in range(nV):
             for q in range(nV):
                 dist[p][q] = min(dist[p][q], dist[p][r] + dist[r][q])
@@ -103,21 +140,42 @@ def floyd(G):
         print('**********************************************************************')
 # Printing the output
 def sol(dist):
-    for p in range(nV):
-        for q in range(nV):
-            if(dist[p][q] == INF):
-                print("INF", end=" ")
-            else:
-                print(dist[p][q], end="  ")
-        print(" ")
+    table = tabulate(dist, tablefmt="simple")
+    print(table)
+
 #Cenova Matica
 #????????????????????????????????????????????????????????????????????
+#kubqo
 G =      [[0, 3, 1, 5, INF, INF],
          [3, 0, 4, INF, INF, 2],
          [1, 4, 0, INF, 7, INF],
          [5, INF, INF, 0, 3, INF],
          [INF, INF, 7, 3, 0, 5 ],
          [INF, 2, INF, INF, 5, 0]]
+
+# #FLO
+# G =      [[0,9,INF,INF,INF,4],
+#          [INF,0,11,7,2,INF],
+#          [5,8,0,INF,INF,6],
+#          [INF,INF,6,0,4,INF],
+#          [7,INF,7,INF,0,3],
+#          [INF,2,INF,10,9,0]]
+
+# #LJ
+# G =      [[0,1,2,INF.INF,6],
+#          [INF,0,3,4,8,INF],
+#          [INF,INF,0,9,5,1],
+#          [INF,INF,INF,0,3,INF],
+#          [INF,1,INF,INF,0,INF],
+#          [INF,10,INF,INF,INF,0]]
+
+# #ty
+# G =      [[],
+#          [],
+#          [],
+#          [],
+#          [],
+#          []]
 #????????????????????????????????????????????????????????????????????
 #matica z navodu
 #navod:
@@ -140,6 +198,7 @@ Graf_z_ulohy_3 = nx.Graph()
 
 #definuj hrany
 #????????????????????????????????????????????????????????????????????
+#kubqo
 Graf_z_ulohy_3.add_edge("1","2", weight = 6)
 Graf_z_ulohy_3.add_edge("1","3", weight = 5)
 Graf_z_ulohy_3.add_edge("1","4", weight = 1)
@@ -155,6 +214,40 @@ Graf_z_ulohy_3.add_edge("4","7", weight = 9)
 Graf_z_ulohy_3.add_edge("5","8", weight = 3)
 Graf_z_ulohy_3.add_edge("6","7", weight = 3)
 Graf_z_ulohy_3.add_edge("7","8", weight = 5)
+
+# #FLO
+# Graf_z_ulohy_3.add_edge("1","2", weight = 6)
+# Graf_z_ulohy_3.add_edge("1","3", weight = 5)
+# Graf_z_ulohy_3.add_edge("1","4", weight = 1)
+# Graf_z_ulohy_3.add_edge("2","4", weight = 4)
+# Graf_z_ulohy_3.add_edge("2","5", weight = 7)
+# Graf_z_ulohy_3.add_edge("2","7", weight = 2)
+# Graf_z_ulohy_3.add_edge("3","4", weight = 2)
+# Graf_z_ulohy_3.add_edge("3","6", weight = 8)
+# Graf_z_ulohy_3.add_edge("3","8", weight = 1)
+# Graf_z_ulohy_3.add_edge("4","5", weight = 11)
+# Graf_z_ulohy_3.add_edge("4","6", weight = 10)
+# Graf_z_ulohy_3.add_edge("4","7", weight = 9)
+# Graf_z_ulohy_3.add_edge("5","8", weight = 3)
+# Graf_z_ulohy_3.add_edge("6","7", weight = 3)
+# Graf_z_ulohy_3.add_edge("7","8", weight = 5)
+
+# #LJ
+# Graf_z_ulohy_3.add_edge("1","2", weight = 6)
+# Graf_z_ulohy_3.add_edge("1","3", weight = 5)
+# Graf_z_ulohy_3.add_edge("1","4", weight = 1)
+# Graf_z_ulohy_3.add_edge("2","4", weight = 4)
+# Graf_z_ulohy_3.add_edge("2","5", weight = 7)
+# Graf_z_ulohy_3.add_edge("2","7", weight = 2)
+# Graf_z_ulohy_3.add_edge("3","4", weight = 2)
+# Graf_z_ulohy_3.add_edge("3","6", weight = 8)
+# Graf_z_ulohy_3.add_edge("3","8", weight = 1)
+# Graf_z_ulohy_3.add_edge("4","5", weight = 11)
+# Graf_z_ulohy_3.add_edge("4","6", weight = 10)
+# Graf_z_ulohy_3.add_edge("4","7", weight = 9)
+# Graf_z_ulohy_3.add_edge("5","8", weight = 3)
+# Graf_z_ulohy_3.add_edge("6","7", weight = 3)
+# Graf_z_ulohy_3.add_edge("7","8", weight = 5)
 #????????????????????????????????????????????????????????????????????
 
 #nakresli graf 3
@@ -243,6 +336,7 @@ Graf_z_ulohy_4 = nx.DiGraph()
 # navod:
 # https://www.youtube.com/watch?v=Tl90tNtKvxs
 #????????????????????????????????????????????????????????????????????
+#kubqo
 Graf_z_ulohy_4.add_edge("z","1", capacity = 14)
 Graf_z_ulohy_4.add_edge("z","2", capacity = 15)
 Graf_z_ulohy_4.add_edge("z","3", capacity = 13)
@@ -257,6 +351,39 @@ Graf_z_ulohy_4.add_edge("4","u", capacity = 9)
 Graf_z_ulohy_4.add_edge("5","4", capacity = 7)
 Graf_z_ulohy_4.add_edge("6","2", capacity = 9)
 Graf_z_ulohy_4.add_edge("6","u", capacity = 11)
+
+# #FLO
+# Graf_z_ulohy_4.add_edge("z","1", capacity = 14)
+# Graf_z_ulohy_4.add_edge("z","2", capacity = 15)
+# Graf_z_ulohy_4.add_edge("z","3", capacity = 13)
+# Graf_z_ulohy_4.add_edge("1","2", capacity = 6)
+# Graf_z_ulohy_4.add_edge("1","4", capacity = 4)
+# Graf_z_ulohy_4.add_edge("1","5", capacity = 8)
+# Graf_z_ulohy_4.add_edge("2","5", capacity = 4)
+# Graf_z_ulohy_4.add_edge("2","3", capacity = 3)
+# Graf_z_ulohy_4.add_edge("2","u", capacity = 10)
+# Graf_z_ulohy_4.add_edge("3","6", capacity = 8)
+# Graf_z_ulohy_4.add_edge("4","u", capacity = 9)
+# Graf_z_ulohy_4.add_edge("5","4", capacity = 7)
+# Graf_z_ulohy_4.add_edge("6","2", capacity = 9)
+# Graf_z_ulohy_4.add_edge("6","u", capacity = 11)
+
+# #LJ
+# Graf_z_ulohy_4.add_edge("z","1", capacity = 14)
+# Graf_z_ulohy_4.add_edge("z","2", capacity = 15)
+# Graf_z_ulohy_4.add_edge("z","3", capacity = 13)
+# Graf_z_ulohy_4.add_edge("1","2", capacity = 6)
+# Graf_z_ulohy_4.add_edge("1","4", capacity = 4)
+# Graf_z_ulohy_4.add_edge("1","5", capacity = 8)
+# Graf_z_ulohy_4.add_edge("2","5", capacity = 4)
+# Graf_z_ulohy_4.add_edge("2","3", capacity = 3)
+# Graf_z_ulohy_4.add_edge("2","u", capacity = 10)
+# Graf_z_ulohy_4.add_edge("3","6", capacity = 8)
+# Graf_z_ulohy_4.add_edge("4","u", capacity = 9)
+# Graf_z_ulohy_4.add_edge("5","4", capacity = 7)
+# Graf_z_ulohy_4.add_edge("6","2", capacity = 9)
+# Graf_z_ulohy_4.add_edge("6","u", capacity = 11)
+
 #????????????????????????????????????????????????????????????????????
 
 #vykresli Graf 4
