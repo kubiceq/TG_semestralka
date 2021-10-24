@@ -103,10 +103,14 @@ for vrchol in range(Graf_z_ulohy_1.order()):
     print(list(Strom_hlbky.edges()))
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #     i+=1
-#     plt.figure(vrchol+i)
-#     string = 'Strom do hlbky pre vrchol:' + str(vrchol)
-#     plt.title(string)
-#     nx.draw(Strom_hlbky, with_labels=True)
+#     edgelist = []
+#     edgelist = Strom_hlbky.edges()
+#     plt.figure(i)
+#     nazov = 'Hlbkovy strom  pre vrchol ' + str(vrchol)
+#     plt.title(nazov)
+#     pos=nx.shell_layout(Graf_z_ulohy_1)
+#     nx.draw_networkx(Graf_z_ulohy_1,pos)
+#     nx.draw_networkx_edges(Graf_z_ulohy_1,pos,edgelist=edgelist,edge_color= COLOR,width=4)
 # plt.show()
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -116,11 +120,15 @@ for vrchol in range(Graf_z_ulohy_1.order()):
     Strom_sirky = nx.bfs_tree(Graf_z_ulohy_1, source=vrchol)
     print(list(Strom_sirky.edges()))
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#     i+=1
-#     plt.figure(vrchol+i)
-#     string = 'Strom do sirky pre vrchol:' + str(vrchol)
-#     plt.title(string)
-#     nx.draw(Strom_sirky, with_labels=True)
+    i += 1
+    edgelist = []
+    edgelist = Strom_sirky.edges()
+    plt.figure(i)
+    nazov = 'Sirkovy strom  pre vrchol ' + str(vrchol)
+    plt.title(nazov)
+    pos = nx.shell_layout(Graf_z_ulohy_1)
+    nx.draw_networkx(Graf_z_ulohy_1, pos)
+    nx.draw_networkx_edges(Graf_z_ulohy_1, pos, edgelist=edgelist, edge_color=COLOR, width=4)
 # plt.show()
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 print('#*********************************************Uloha_2**********************************************************************************')
@@ -327,7 +335,7 @@ print(sorted(edgelist))
 # i+=1
 # plt.figure(i)
 # plt.title('Maximalny strom v grafe 3')
-# pos=nx.spring_layout(Graf_z_ulohy_3)
+# pos=nx.shell_layout(Graf_z_ulohy_3)
 # nx.draw_networkx(Graf_z_ulohy_3,pos)
 # labels = nx.get_edge_attributes(Graf_z_ulohy_3,'weight')
 # nx.draw_networkx_edges(Graf_z_ulohy_3,pos,edgelist=edgelist,edge_color= COLOR,width=4)
