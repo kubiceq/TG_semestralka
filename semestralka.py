@@ -17,6 +17,7 @@ from tabulate import tabulate
 import pydot
 from networkx.drawing.nx_pydot import graphviz_layout
 
+
 #legenda
 #???????????????????????????????? -> zadaj tvoje hodnoty
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -> odkomentuj pre grafy
@@ -34,12 +35,13 @@ print('#*********************************************Uloha_1********************
 print('navod:')
 print('https://youtu.be/7fujbpJ0LB4?t=69')
 #definuj graf
-Graf_z_ulohy_1 = nx.Graph()
+Graf_z_ulohy_1 = nx.DiGraph()
 
 #matica susednosti(zadanie):
 #????????????????????????????????????????????????????????????????????
+
 #kubqo
-matica_susednosti = np.array([[0,0,0,0,1,0,0,0],
+matica_susednosti = np.matrix([[0,0,0,0,1,0,0,0],
                               [0,0,0,1,0,1,0,0],
                               [1,0,0,0,0,1,0,1],
                               [0,0,0,0,0,0,0,1],
@@ -83,10 +85,8 @@ matica_susednosti = np.array([[0,0,0,0,1,0,0,0],
 table = tabulate(matica_susednosti, tablefmt="simple")
 print('************************MATICA_SUSEDNOSTI****************************')
 print(table)
-
 #vytvorenie grafu z matice susednosti
-Graf_z_ulohy_1 = nx.from_numpy_matrix(matica_susednosti)
-
+Graf_z_ulohy_1 = nx.from_numpy_matrix(matica_susednosti,create_using=nx.DiGraph())
 #nakresli graf z ulohy 1
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # i+=1
@@ -100,7 +100,15 @@ Graf_z_ulohy_1 = nx.from_numpy_matrix(matica_susednosti)
 print("Stromy pri prehladani do hlbky")
 for vrchol in range(Graf_z_ulohy_1.order()):
     Strom_hlbky = nx.dfs_tree(Graf_z_ulohy_1, source=vrchol)
-    print(list(Strom_hlbky.edges()))
+    hrany_od_0 = nx.dfs_edges(Strom_hlbky)
+    hrany_od_1 = []
+    # kedze my cislujeme vrcholy od 1, nie od 0, tak kazdu hranu premenujem +1
+    for hrana in list(hrany_od_0):
+        hrana = list(hrana)
+        hrana[0] += 1
+        hrana[1] += 1
+        hrany_od_1.append(hrana)
+    print(hrany_od_1)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #     i+=1
 #     edgelist = []
@@ -108,29 +116,36 @@ for vrchol in range(Graf_z_ulohy_1.order()):
 #     plt.figure(i)
 #     nazov = 'Hlbkovy strom  pre vrchol ' + str(vrchol)
 #     plt.title(nazov)
-#     pos=nx.shell_layout(Graf_z_ulohy_1)
-#     nx.draw_networkx(Graf_z_ulohy_1,pos)
-#     nx.draw_networkx_edges(Graf_z_ulohy_1,pos,edgelist=edgelist,edge_color= COLOR,width=4)
+#     nx.draw(Strom_hlbky,with_labels = True )
 # plt.show()
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#prehladaj do sirky
+#prehladaj do sirky pre vsetky vrcholy
 print("Stromy pri prehladani do sirky")
 for vrchol in range(Graf_z_ulohy_1.order()):
     Strom_sirky = nx.bfs_tree(Graf_z_ulohy_1, source=vrchol)
-    print(list(Strom_sirky.edges()))
+    hrany_od_0 = nx.dfs_edges(Strom_sirky)
+    hrany_od_1 = []
+    #kedze my cislujeme vrcholy od 1, nie od 0, tak kazdu hranu premenujem +1
+    for hrana in list(hrany_od_0):
+        hrana = list(hrana)
+        hrana[0] += 1
+        hrana[1] += 1
+        hrany_od_1.append(hrana)
+    print(hrany_od_1)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    i += 1
-    edgelist = []
-    edgelist = Strom_sirky.edges()
-    plt.figure(i)
-    nazov = 'Sirkovy strom  pre vrchol ' + str(vrchol)
-    plt.title(nazov)
-    pos = nx.shell_layout(Graf_z_ulohy_1)
-    nx.draw_networkx(Graf_z_ulohy_1, pos)
-    nx.draw_networkx_edges(Graf_z_ulohy_1, pos, edgelist=edgelist, edge_color=COLOR, width=4)
+#     i += 1
+#     edgelist = []
+#     edgelist = Strom_sirky.edges()
+#     plt.figure(i)
+#     nazov = 'Sirkovy strom  pre vrchol ' + str(vrchol)
+#     plt.title(nazov)
+#     nx.draw(Strom_sirky, with_labels=True)
 # plt.show()
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
 print('#*********************************************Uloha_2**********************************************************************************')
 print('#*********************************************Uloha_2**********************************************************************************')
 print('#*********************************************Uloha_2**********************************************************************************')
@@ -140,15 +155,15 @@ print(' https://blog.devgenius.io/floyd-warshall-all-pairs-shortest-path-matrix-
 # Pocet vrcholov, ktore dosiahnem dnes v noci
 nV = 6
 #????????????????????????????????????????????????????????????????????
+#INF je pre nas nekonecno. preto ak bude v maticiach nejake velke cislo(blizke nasej INF), bude to pravdepodobne nekonecno
 INF = 9999
-print('Velke cisla v matici predstavuju nekonecno')
 print('Zadanie == Stupen 0')
 # Algorithm
 def floyd(G):
     dist = list(map(lambda p: list(map(lambda q: q, p)), G))
     # Adding vertices individually
     for r in range(nV):
-        print("Stupen(D)",r)
+        print("Stupen(D)",r+1)
         for p in range(nV):
             for q in range(nV):
                 dist[p][q] = min(dist[p][q], dist[p][r] + dist[r][q])
@@ -177,8 +192,8 @@ G =      [[0, 3, 1, 5, INF, INF],
 #          [7,INF,7,INF,0,3],
 #          [INF,2,INF,10,9,0]]
 
-# #LJ
-# G =      [[0,1,2,INF.INF,6],
+#LJ
+# G =      [[0,1,2,INF,INF,6],
 #          [INF,0,3,4,8,INF],
 #          [INF,INF,0,9,5,1],
 #          [INF,INF,INF,0,3,INF],
@@ -202,17 +217,17 @@ G =      [[0, 3, 1, 5, INF, INF],
 #          [INF,-3,1,0]]
 floyd(G)
 
+
 print('#*********************************************Uloha_3**********************************************************************************')
 print('#*********************************************Uloha_3**********************************************************************************')
 print('#*********************************************Uloha_3**********************************************************************************')
-from networkx.algorithms import tree
-from networkx.drawing.nx_pydot import graphviz_layout
-Graf_z_ulohy_3 = nx.Graph()
 print('navod:')
 print(' https://www.youtube.com/watch?v=71UQH7Pr9kU')
 print(' pekne vysvetlenie je aj na wiki')
 print(' https://sk.wikipedia.org/wiki/Minimálna_kostra_grafu')
-
+from networkx.algorithms import tree
+from networkx.drawing.nx_pydot import graphviz_layout
+Graf_z_ulohy_3 = nx.Graph()
 
 #definuj hrany
 #????????????????????????????????????????????????????????????????????
@@ -273,12 +288,12 @@ Graf_z_ulohy_3.add_edge("7","8", weight = 5)
 # i+=1
 # plt.figure(i)
 # plt.title('Graf 3')
-# pos=nx.circular_layout(Graf_z_ulohy_3) # pos = nx.nx_agraph.graphviz_layout(Graf_z_ulohy_3)
+# pos=nx.shell_layout(Graf_z_ulohy_3)
 # nx.draw_networkx(Graf_z_ulohy_3,pos)
 # labels = nx.get_edge_attributes(Graf_z_ulohy_3,'weight')
 # nx.draw_networkx_edge_labels(Graf_z_ulohy_3,pos,edge_labels=labels)
 # plt.show()
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #najdi minimalny strom grafu 3
 print("minimalny strom / kostra: ")
@@ -301,15 +316,15 @@ print(sorted(edgelist))
 
 #vykresli minimalny strom V grafe 3
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-i+=1
-plt.figure(i)
-plt.title('Minimalny strom v Grafe 3')
-pos=nx.shell_layout(Graf_z_ulohy_3)
-nx.draw_networkx(Graf_z_ulohy_3,pos)
-labels = nx.get_edge_attributes(Graf_z_ulohy_3,'weight')
-nx.draw_networkx_edges(Graf_z_ulohy_3,pos,edgelist=edgelist,edge_color= COLOR,width=4)
-nx.draw_networkx_edge_labels(Graf_z_ulohy_3,pos,edge_labels=labels)
-plt.show()
+# i+=1
+# plt.figure(i)
+# plt.title('Minimalny strom v Grafe 3')
+# pos=nx.shell_layout(Graf_z_ulohy_3)
+# nx.draw_networkx(Graf_z_ulohy_3,pos)
+# labels = nx.get_edge_attributes(Graf_z_ulohy_3,'weight')
+# nx.draw_networkx_edges(Graf_z_ulohy_3,pos,edgelist=edgelist,edge_color= COLOR,width=4)
+# nx.draw_networkx_edge_labels(Graf_z_ulohy_3,pos,edge_labels=labels)
+# plt.show()
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -321,13 +336,13 @@ print(sorted(edgelist))
 
 #vykresli maximalny strom
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#Tmax = nx.Graph();
-#Tmax.add_edges_from(edgelist)
-#i+=1
-#plt.figure(i)
-#plt.title('Maximalna kostra grafu 3')
-#nx.draw(Tmax, with_labels=True)
-#plt.show()
+# Tmax = nx.Graph();
+# Tmax.add_edges_from(edgelist)
+# i+=1
+# plt.figure(i)
+# plt.title('Maximalna kostra grafu 3')
+# nx.draw(Tmax, with_labels=True)
+# plt.show()
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #vykresli maximalny strom V grafe 3
@@ -414,7 +429,7 @@ Graf_z_ulohy_4.add_edge("6","u", capacity = 11)
 # i+=1
 # plt.figure(i)
 # plt.title('Graf 4')
-# pos=nx.spring_layout(Graf_z_ulohy_4) # pos = nx.nx_agraph.graphviz_layout(G)
+# pos=nx.shell_layout(Graf_z_ulohy_4) # pos = nx.nx_agraph.graphviz_layout(G)
 # nx.draw_networkx(Graf_z_ulohy_4,pos)
 # labels = nx.get_edge_attributes(Graf_z_ulohy_4,'capacity')
 # nx.draw_networkx_edge_labels(Graf_z_ulohy_4,pos,edge_labels=labels)
@@ -438,7 +453,7 @@ print('Kapacita maximalneho toku: ',kapacita)
 # i+=1
 # plt.figure(i)
 # plt.title('Graf 4')
-# pos=nx.spring_layout(Graf_z_ulohy_4) # pos = nx.nx_agraph.graphviz_layout(G)
+# pos=nx.shell_layout(Graf_z_ulohy_4) # pos = nx.nx_agraph.graphviz_layout(G)
 # nx.draw_networkx(Graf_z_ulohy_4,pos)
 # labels = nx.get_edge_attributes(Graf_z_ulohy_4,'capacity')
 # nx.draw_networkx_edge_labels(Graf_z_ulohy_4,pos,edge_labels=labels)
@@ -474,7 +489,12 @@ print('Kapacita minimalneho rezu: ',kapacita)
 #             index = list(Graf_z_ulohy_4).index(vrchol)
 #             color_map[index] = 'red'
 #             print(index)
-# nx.draw(Graf_z_ulohy_4,node_color = color_map, with_labels=True)
+# plt.title('Rozdelenie grafu pre minimalny rez')
+# pos=nx.planar_layout(Graf_z_ulohy_4)
+# labels = nx.get_edge_attributes(Graf_z_ulohy_4,'capacity')
+# nx.draw_networkx_edges(Graf_z_ulohy_4,pos,edgelist=edgelist,edge_color= COLOR,width=4)
+# nx.draw_networkx_edge_labels(Graf_z_ulohy_4,pos,edge_labels=labels)
+# nx.draw_networkx(Graf_z_ulohy_4,pos, node_color = color_map)
 # plt.show()
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #by kubqo, FLO, LJ
