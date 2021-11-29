@@ -1,18 +1,6 @@
-try:
-  import networkx as nx
-except ImportError:
-  print ("Trying to Install required module: networkx\n")
-  os.system('python -m pip install networkx')
-try:
-  import numpy as np
-except ImportError:
-  print ("Trying to Install required module: numpy\n")
-  os.system('python -m pip install numpy')
-try:
-  import matplotlib.pyplot as plt
-except ImportError:
-  print ("Trying to Install required module: matplotlib\n")
-  os.system('python -m pip install -U matplotlib')
+import networkx as nx
+import numpy as np
+import matplotlib.pyplot as plt
 from tabulate import tabulate
 import pydot
 from networkx.drawing.nx_pydot import graphviz_layout
@@ -42,13 +30,13 @@ Graf_z_ulohy_1 = nx.DiGraph()
 
 #kubqo
 matica_susednosti = np.matrix([[0,0,0,0,1,0,0,0],
-                              [0,0,0,1,0,1,0,0],
-                              [1,0,0,0,0,1,0,1],
-                              [0,0,0,0,0,0,0,1],
-                              [0,0,1,1,0,0,0,1],
-                              [0,0,0,1,0,0,1,1],
-                              [0,1,0,1,1,0,0,0],
-                              [1,0,0,0,0,0,0,0]])
+                               [0,0,0,1,0,1,0,0],
+                               [1,0,0,0,0,1,0,1],
+                               [0,0,0,0,0,0,0,1],
+                               [0,0,1,1,0,0,0,1],
+                               [0,0,0,1,0,0,1,1],
+                               [0,1,0,1,1,0,0,0],
+                               [1,0,0,0,0,0,0,0]])
 
 # #FLO
 # matica_susednosti = np.array([[0,0,0,1,1,0,1,1],
@@ -69,6 +57,8 @@ matica_susednosti = np.matrix([[0,0,0,0,1,0,0,0],
 #                               [0,0,1,1,1,0,0,0],
 #                               [1,1,1,0,0,0,0,1],
 #                               [0,0,1,1,1,0,1,0]])
+
+
 
 # #ty
 # matica_susednosti = np.array([[],
@@ -152,8 +142,7 @@ print('#*********************************************Uloha_2********************
 print('navod:')
 print(' https://blog.devgenius.io/floyd-warshall-all-pairs-shortest-path-matrix-multiplication-1ae24f3312e4 ')
 #????????????????????????????????????????????????????????????????????
-# Pocet vrcholov, ktore dosiahnem dnes v noci
-nV = 6
+
 #????????????????????????????????????????????????????????????????????
 #INF je pre nas nekonecno. preto ak bude v maticiach nejake velke cislo(blizke nasej INF), bude to pravdepodobne nekonecno
 INF = 9999
@@ -176,15 +165,39 @@ def sol(dist):
 
 #Cenova Matica
 #????????????????????????????????????????????????????????????????????
-#kubqo
-G =      [[0, 3, 1, 5, INF, INF],
-         [3, 0, 4, INF, INF, 2],
-         [1, 4, 0, INF, 7, INF],
-         [5, INF, INF, 0, 3, INF],
-         [INF, INF, 7, 3, 0, 5 ],
-         [INF, 2, INF, INF, 5, 0]]
+# #cvicenie 8 prva matica
+# Pocet vrcholov, ktore dosiahnem dnes v noci
+#nV = 7
+# G =      [[0, 2, 4, 8, 7, 8, INF],
+#          [INF, 0, 1, INF, INF, INF,INF],
+#          [1, INF, 0, 3, INF, INF,8],
+#          [INF,INF,INF,0,4,INF,3],
+#          [INF,INF,3,INF,0,15,12],
+#          [INF,INF,INF,2,INF,0,INF],
+#          [INF,INF,INF,INF,INF,6,0]]
+
+#cvicenie 8 druha matica
+# Pocet vrcholov, ktore dosiahnem dnes v noci
+nV = 5
+G =      [[0,9,5,INF,7],
+         [9,0,11,3,2],
+         [5,11,0,6,7],
+         [INF,3,6,0,4],
+         [7,2,7,4,0]]
+
+# #kubqo
+# Pocet vrcholov, ktore dosiahnem dnes v noci
+#nV = 6
+# G =      [[0, 3, 1, 5, INF, INF],
+#          [3, 0, 4, INF, INF, 2],
+#          [1, 4, 0, INF, 7, INF],
+#          [5, INF, INF, 0, 3, INF],
+#          [INF, INF, 7, 3, 0, 5 ],
+#          [INF, 2, INF, INF, 5, 0]]
 
 # #FLO
+# Pocet vrcholov, ktore dosiahnem dnes v noci
+#nV = 6
 # G =      [[0,9,INF,INF,INF,4],
 #          [INF,0,11,7,2,INF],
 #          [5,8,0,INF,INF,6],
@@ -193,6 +206,8 @@ G =      [[0, 3, 1, 5, INF, INF],
 #          [INF,2,INF,10,9,0]]
 
 #LJ
+# Pocet vrcholov, ktore dosiahnem dnes v noci
+#nV = 6
 # G =      [[0,1,2,INF,INF,6],
 #          [INF,0,3,4,8,INF],
 #          [INF,INF,0,9,5,1],
@@ -201,6 +216,8 @@ G =      [[0, 3, 1, 5, INF, INF],
 #          [INF,10,INF,INF,INF,0]]
 
 # #ty
+# Pocet vrcholov, ktore dosiahnem dnes v noci
+#nV =
 # G =      [[],
 #          [],
 #          [],
