@@ -326,7 +326,11 @@ Graf_z_ulohy_3.add_edge("7","8", weight = 5)
 print("minimalny strom / kostra: ")
 minst = tree.minimum_spanning_edges(Graf_z_ulohy_3, algorithm='kruskal', data=False)
 edgelist = list(minst)
+vahaStromu = 0
+for hrana in edgelist:
+    vahaStromu+= Graf_z_ulohy_3.get_edge_data(hrana[0],hrana[1])['weight']
 print(sorted(edgelist))
+print("Vaha Minimalneho Stromu = ",vahaStromu)
 
 
 
@@ -359,7 +363,11 @@ print(sorted(edgelist))
 print("maximalny strom / kostra: ")
 maxst = tree.maximum_spanning_edges(Graf_z_ulohy_3, algorithm='kruskal', data=False)
 edgelist = list(maxst)
+vahaStromu = 0
+for hrana in edgelist:
+    vahaStromu+= Graf_z_ulohy_3.get_edge_data(hrana[0],hrana[1])['weight']
 print(sorted(edgelist))
+print("Vaha Maximalneho Stromu = ",vahaStromu)
 
 #vykresli maximalny strom
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -415,39 +423,39 @@ print(' https://www.youtube.com/watch?v=Tl90tNtKvxs ')
 # Graf_z_ulohy_4.add_edge("6","u", capacity = 11)
 
 # #FLO
-# Graf_z_ulohy_4.add_edge("z","1", capacity = 8)
-# Graf_z_ulohy_4.add_edge("z","2", capacity = 5)
-# Graf_z_ulohy_4.add_edge("z","3", capacity = 2)
-# Graf_z_ulohy_4.add_edge("1","4", capacity = 2)
-# Graf_z_ulohy_4.add_edge("2","4", capacity = 3)
-# Graf_z_ulohy_4.add_edge("2","5", capacity = 3)
-# Graf_z_ulohy_4.add_edge("2","3", capacity = 3)
-# Graf_z_ulohy_4.add_edge("3","6", capacity = 5)
-# Graf_z_ulohy_4.add_edge("3","u", capacity = 2)
-# Graf_z_ulohy_4.add_edge("4","u", capacity = 2)
-# Graf_z_ulohy_4.add_edge("5","1", capacity = 5)
-# Graf_z_ulohy_4.add_edge("5","4", capacity = 3)
-# Graf_z_ulohy_4.add_edge("5","6", capacity = 5)
-# Graf_z_ulohy_4.add_edge("5","u", capacity = 3)
-# Graf_z_ulohy_4.add_edge("6","u", capacity = 10)
+Graf_z_ulohy_4.add_edge("z","1", capacity = 8)
+Graf_z_ulohy_4.add_edge("z","2", capacity = 5)
+Graf_z_ulohy_4.add_edge("z","3", capacity = 2)
+Graf_z_ulohy_4.add_edge("1","4", capacity = 2)
+Graf_z_ulohy_4.add_edge("2","4", capacity = 3)
+Graf_z_ulohy_4.add_edge("2","5", capacity = 3)
+Graf_z_ulohy_4.add_edge("2","3", capacity = 3)
+Graf_z_ulohy_4.add_edge("3","6", capacity = 5)
+Graf_z_ulohy_4.add_edge("3","u", capacity = 2)
+Graf_z_ulohy_4.add_edge("4","u", capacity = 2)
+Graf_z_ulohy_4.add_edge("5","1", capacity = 5)
+Graf_z_ulohy_4.add_edge("5","4", capacity = 3)
+Graf_z_ulohy_4.add_edge("5","6", capacity = 5)
+Graf_z_ulohy_4.add_edge("5","u", capacity = 3)
+Graf_z_ulohy_4.add_edge("6","u", capacity = 10)
 
 # #LJ
-Graf_z_ulohy_4.add_edge("z","1", capacity = 6)
-Graf_z_ulohy_4.add_edge("z","4", capacity = 15)
-Graf_z_ulohy_4.add_edge("z","6", capacity = 5)
-Graf_z_ulohy_4.add_edge("1","2", capacity = 8)
-Graf_z_ulohy_4.add_edge("2","3", capacity = 3)
-Graf_z_ulohy_4.add_edge("2","5", capacity = 5)
-Graf_z_ulohy_4.add_edge("2","u", capacity = 4)
-Graf_z_ulohy_4.add_edge("3","u", capacity = 9)
-Graf_z_ulohy_4.add_edge("4","1", capacity = 6)
-Graf_z_ulohy_4.add_edge("4","2", capacity = 3)
-Graf_z_ulohy_4.add_edge("4","5", capacity = 3)
-Graf_z_ulohy_4.add_edge("4","6", capacity = 3)
-Graf_z_ulohy_4.add_edge("5","3", capacity = 3)
-Graf_z_ulohy_4.add_edge("5","6", capacity = 3)
-Graf_z_ulohy_4.add_edge("5","u", capacity = 5)
-Graf_z_ulohy_4.add_edge("6","u", capacity = 10)
+# Graf_z_ulohy_4.add_edge("z","1", capacity = 6)
+# Graf_z_ulohy_4.add_edge("z","4", capacity = 15)
+# Graf_z_ulohy_4.add_edge("z","6", capacity = 5)
+# Graf_z_ulohy_4.add_edge("1","2", capacity = 8)
+# Graf_z_ulohy_4.add_edge("2","3", capacity = 3)
+# Graf_z_ulohy_4.add_edge("2","5", capacity = 5)
+# Graf_z_ulohy_4.add_edge("2","u", capacity = 4)
+# Graf_z_ulohy_4.add_edge("3","u", capacity = 9)
+# Graf_z_ulohy_4.add_edge("4","1", capacity = 6)
+# Graf_z_ulohy_4.add_edge("4","2", capacity = 3)
+# Graf_z_ulohy_4.add_edge("4","5", capacity = 3)
+# Graf_z_ulohy_4.add_edge("4","6", capacity = 3)
+# Graf_z_ulohy_4.add_edge("5","3", capacity = 3)
+# Graf_z_ulohy_4.add_edge("5","6", capacity = 3)
+# Graf_z_ulohy_4.add_edge("5","u", capacity = 5)
+# Graf_z_ulohy_4.add_edge("6","u", capacity = 10)
 
 #????????????????????????????????????????????????????????????????????
 
