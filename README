@@ -1,10 +1,10 @@
-#legenda
-#???????????????????????????????? -> zadaj tvoje hodnoty
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -> odkomentuj pre grafy
-# pre odkomentovanie bloku textu oznac a stlac 'Ctrl' + '/'
-#Disclaimer:
-# ak sa ti nahodou niekedy tento krasny kus kodu dostane pod ruky, vedz, ze si nim mozes pracu odkontrolovat, ale rozhodne vsetko neurobi za teba.
-#Vacsina vypisov musi v konecnom dosledku vyzerat inak, ako nam ju vypise skript
+legenda
+???????????????????????????????? -> zadaj tvoje hodnoty
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -> odkomentuj pre grafy
+ pre odkomentovanie bloku textu oznac a stlac 'Ctrl' + '/'
+Disclaimer:
+Ak sa ti nahodou niekedy tento krasny kus kodu dostane pod ruky, vedz, ze si nim mozes pracu odkontrolovat, ale rozhodne vsetko neurobi za teba.
+Vacsina vypisov musi v konecnom dosledku vyzerat inak, ako nam ju vypise skript
 
 Staci pouzit vlastne zadanie a drzat sa komentarov.
 Ak niecomu nechapes, tak nebud debil a spytaj sa vyucujuceho. Pravdepodobne ti to rad vysvetli
