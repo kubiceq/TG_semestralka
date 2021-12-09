@@ -43,14 +43,14 @@ Graf_z_ulohy_1 = nx.DiGraph()
 #                                [1,0,0,0,0,0,0,0]])
 
 # #FLO
-matica_susednosti = np.array([[0,0,0,1,1,0,1,1],
-                              [0,0,1,0,1,1,1,0],
-                              [0,1,0,0,0,1,1,0],
-                              [1,0,0,0,1,0,0,1],
-                              [1,1,0,1,0,1,0,1],
-                              [0,1,1,0,1,0,0,1],
-                              [1,1,1,0,0,0,0,1],
-                              [1,0,0,1,1,1,1,0]])
+# matica_susednosti = np.array([[0,0,0,1,1,0,1,1],
+#                               [0,0,1,0,1,1,1,0],
+#                               [0,1,0,0,0,1,1,0],
+#                               [1,0,0,0,1,0,0,1],
+#                               [1,1,0,1,0,1,0,1],
+#                               [0,1,1,0,1,0,0,1],
+#                               [1,1,1,0,0,0,0,1],
+#                               [1,0,0,1,1,1,1,0]])
 
 # #LJ
 # matica_susednosti = np.array([[0,1,0,0,1,0,1,0],
@@ -62,6 +62,35 @@ matica_susednosti = np.array([[0,0,0,1,1,0,1,1],
 #                               [1,1,1,0,0,0,0,1],
 #                               [0,0,1,1,1,0,1,0]])
 
+# # Dejna
+matica_susednosti = np.array([[0,1,0,1,1,0,1,0],
+                              [1,0,1,0,1,0,1,0],
+                              [0,1,0,1,0,1,1,1],
+                              [1,0,1,0,0,1,0,1],
+                              [1,1,0,0,0,1,1,1],
+                              [0,0,1,1,1,0,0,0],
+                              [1,1,1,0,1,0,0,1],
+                              [0,0,1,1,1,0,1,0]])
+
+# FL
+# matica_susednosti = np.array([[0,1,1,0,0,0,0,0],
+#                               [0,0,0,1,0,0,0,0],
+#                               [0,1,0,1,1,0,0,0],
+#                               [1,0,0,0,0,1,1,0],
+#                               [0,0,0,1,0,0,1,0],
+#                               [0,0,0,0,1,0,0,1],
+#                               [0,0,0,0,0,1,0,1],
+#                               [0,0,0,0,1,0,0,0]])
+
+# # FBa
+# matica_susednosti = np.array([[0,1,1,1,0,0,0,0],
+#                               [1,0,1,1,0,1,0,0],
+#                               [1,1,0,1,1,0,1,1],
+#                               [1,1,1,0,1,1,0,0],
+#                               [0,0,1,1,0,0,1,0],
+#                               [0,1,0,1,0,0,1,1],
+#                               [0,0,1,0,1,1,0,1],
+#                               [0,0,1,0,0,1,1,0]])
 
 
 # #ty
@@ -202,13 +231,13 @@ def sol(dist):
 
 #FLO
 # #nV => Pocet vrcholov, ktore dosiahnem dnes v noci
-nV = 6
-G =      [[0,9,INF,INF,INF,4],
-         [INF,0,11,7,2,INF],
-         [5,8,0,INF,INF,6],
-         [INF,INF,6,0,4,INF],
-         [7,INF,7,INF,0,3],
-         [INF,2,INF,10,9,0]]
+# nV = 6
+# G =      [[0,9,INF,INF,INF,4],
+#          [INF,0,11,7,2,INF],
+#          [5,8,0,INF,INF,6],
+#          [INF,INF,6,0,4,INF],
+#          [7,INF,7,INF,0,3],
+#          [INF,2,INF,10,9,0]]
 
 #LJ
 #nV => Pocet vrcholov, ktore dosiahnem dnes v noci
@@ -219,6 +248,16 @@ G =      [[0,9,INF,INF,INF,4],
 #          [INF,INF,INF,0,3,INF],
 #          [INF,1,INF,INF,0,INF],
 #          [INF,10,INF,INF,INF,0]]
+
+#Dejna
+# nV => Pocet vrcholov, ktore dosiahnem dnes v noci
+nV = 6
+G =      [[0,1,2,INF,INF,6],
+         [INF,0,3,INF,8,INF],
+         [INF,INF,0,9,5,1],
+         [INF,4,INF,0,3,INF],
+         [7,1,INF,INF,0,INF],
+         [INF,10,INF,INF,INF,0]]
 
 # #ty
 #nV => Pocet vrcholov, ktore dosiahnem dnes v noci
@@ -293,19 +332,50 @@ Graf_z_ulohy_3 = nx.Graph()
 # Graf_z_ulohy_3.add_edge("6","8", weight = 9)
 # Graf_z_ulohy_3.add_edge("7","8", weight = 12)
 
-# #LJ
-Graf_z_ulohy_3.add_edge("1","2", weight = 5)
-Graf_z_ulohy_3.add_edge("1","3", weight = 4)
-Graf_z_ulohy_3.add_edge("2","3", weight = 8)
-Graf_z_ulohy_3.add_edge("2","4", weight = 2)
-Graf_z_ulohy_3.add_edge("2","7", weight = 7)
-Graf_z_ulohy_3.add_edge("3","4", weight = 3)
-Graf_z_ulohy_3.add_edge("3","5", weight = 3)
-Graf_z_ulohy_3.add_edge("4","5", weight = 9)
-Graf_z_ulohy_3.add_edge("4","6", weight = 6)
-Graf_z_ulohy_3.add_edge("4","7", weight = 1)
-Graf_z_ulohy_3.add_edge("6","7", weight = 8)
-Graf_z_ulohy_3.add_edge("6","8", weight = 7)
+# # #LJ
+# Graf_z_ulohy_3.add_edge("1","2", weight = 5)
+# Graf_z_ulohy_3.add_edge("1","3", weight = 4)
+# Graf_z_ulohy_3.add_edge("2","3", weight = 8)
+# Graf_z_ulohy_3.add_edge("2","4", weight = 2)
+# Graf_z_ulohy_3.add_edge("2","7", weight = 7)
+# Graf_z_ulohy_3.add_edge("3","4", weight = 3)
+# Graf_z_ulohy_3.add_edge("3","5", weight = 3)
+# Graf_z_ulohy_3.add_edge("4","5", weight = 9)
+# Graf_z_ulohy_3.add_edge("4","6", weight = 6)
+# Graf_z_ulohy_3.add_edge("4","7", weight = 1)
+# Graf_z_ulohy_3.add_edge("6","7", weight = 8)
+# Graf_z_ulohy_3.add_edge("6","8", weight = 7)
+# Graf_z_ulohy_3.add_edge("7","8", weight = 5)
+
+# #FBa
+# Graf_z_ulohy_3.add_edge("1","2", weight =10 )
+# Graf_z_ulohy_3.add_edge("1","3", weight = 11)
+# Graf_z_ulohy_3.add_edge("1","4", weight =5 )
+# Graf_z_ulohy_3.add_edge("2","4", weight = 12)
+# Graf_z_ulohy_3.add_edge("2","5", weight =15 )
+# Graf_z_ulohy_3.add_edge("3","4", weight =8 )
+# Graf_z_ulohy_3.add_edge("3","6", weight =7 )
+# Graf_z_ulohy_3.add_edge("4","5", weight =13 )
+# Graf_z_ulohy_3.add_edge("4","6", weight = 8)
+# Graf_z_ulohy_3.add_edge("5","6", weight =3 )
+# Graf_z_ulohy_3.add_edge("5","7", weight =5 )
+# Graf_z_ulohy_3.add_edge("5","8", weight = 11)
+# Graf_z_ulohy_3.add_edge("6","7", weight =13)
+# Graf_z_ulohy_3.add_edge("7","8", weight =2 )
+
+#Dejna
+Graf_z_ulohy_3.add_edge("1","2", weight =4 )
+Graf_z_ulohy_3.add_edge("1","3", weight =8 )
+Graf_z_ulohy_3.add_edge("2","3", weight =2 )
+Graf_z_ulohy_3.add_edge("2","4", weight =7 )
+Graf_z_ulohy_3.add_edge("2","7", weight =3 )
+Graf_z_ulohy_3.add_edge("3","4", weight =3 )
+Graf_z_ulohy_3.add_edge("3","5", weight =9 )
+Graf_z_ulohy_3.add_edge("4","5", weight =6 )
+Graf_z_ulohy_3.add_edge("4","6", weight = 1)
+Graf_z_ulohy_3.add_edge("4","7", weight =8 )
+Graf_z_ulohy_3.add_edge("6","7", weight =7 )
+Graf_z_ulohy_3.add_edge("6","8", weight =5 )
 Graf_z_ulohy_3.add_edge("7","8", weight = 5)
 
 #????????????????????????????????????????????????????????????????????
@@ -423,21 +493,21 @@ print(' https://www.youtube.com/watch?v=Tl90tNtKvxs ')
 # Graf_z_ulohy_4.add_edge("6","u", capacity = 11)
 
 # #FLO
-Graf_z_ulohy_4.add_edge("z","1", capacity = 8)
-Graf_z_ulohy_4.add_edge("z","2", capacity = 5)
-Graf_z_ulohy_4.add_edge("z","3", capacity = 2)
-Graf_z_ulohy_4.add_edge("1","4", capacity = 2)
-Graf_z_ulohy_4.add_edge("2","4", capacity = 3)
-Graf_z_ulohy_4.add_edge("2","5", capacity = 3)
-Graf_z_ulohy_4.add_edge("2","3", capacity = 3)
-Graf_z_ulohy_4.add_edge("3","6", capacity = 5)
-Graf_z_ulohy_4.add_edge("3","u", capacity = 2)
-Graf_z_ulohy_4.add_edge("4","u", capacity = 2)
-Graf_z_ulohy_4.add_edge("5","1", capacity = 5)
-Graf_z_ulohy_4.add_edge("5","4", capacity = 3)
-Graf_z_ulohy_4.add_edge("5","6", capacity = 5)
-Graf_z_ulohy_4.add_edge("5","u", capacity = 3)
-Graf_z_ulohy_4.add_edge("6","u", capacity = 10)
+# Graf_z_ulohy_4.add_edge("z","1", capacity = 8)
+# Graf_z_ulohy_4.add_edge("z","2", capacity = 5)
+# Graf_z_ulohy_4.add_edge("z","3", capacity = 2)
+# Graf_z_ulohy_4.add_edge("1","4", capacity = 2)
+# Graf_z_ulohy_4.add_edge("2","4", capacity = 3)
+# Graf_z_ulohy_4.add_edge("2","5", capacity = 3)
+# Graf_z_ulohy_4.add_edge("2","3", capacity = 3)
+# Graf_z_ulohy_4.add_edge("3","6", capacity = 5)
+# Graf_z_ulohy_4.add_edge("3","u", capacity = 2)
+# Graf_z_ulohy_4.add_edge("4","u", capacity = 2)
+# Graf_z_ulohy_4.add_edge("5","1", capacity = 5)
+# Graf_z_ulohy_4.add_edge("5","4", capacity = 3)
+# Graf_z_ulohy_4.add_edge("5","6", capacity = 5)
+# Graf_z_ulohy_4.add_edge("5","u", capacity = 3)
+# Graf_z_ulohy_4.add_edge("6","u", capacity = 10)
 
 # #LJ
 # Graf_z_ulohy_4.add_edge("z","1", capacity = 6)
@@ -456,6 +526,26 @@ Graf_z_ulohy_4.add_edge("6","u", capacity = 10)
 # Graf_z_ulohy_4.add_edge("5","6", capacity = 3)
 # Graf_z_ulohy_4.add_edge("5","u", capacity = 5)
 # Graf_z_ulohy_4.add_edge("6","u", capacity = 10)
+
+#Dejna
+Graf_z_ulohy_4.add_edge("z","1", capacity = 6 )
+Graf_z_ulohy_4.add_edge("z","4", capacity = 15)
+Graf_z_ulohy_4.add_edge("z","6", capacity = 7 )
+Graf_z_ulohy_4.add_edge("1","2", capacity = 8 )
+Graf_z_ulohy_4.add_edge("2","3", capacity = 3 )
+Graf_z_ulohy_4.add_edge("2","u", capacity = 4 )
+Graf_z_ulohy_4.add_edge("2","5", capacity = 5 )
+Graf_z_ulohy_4.add_edge("3","u", capacity = 9 )
+Graf_z_ulohy_4.add_edge("4","1", capacity = 4 )
+Graf_z_ulohy_4.add_edge("4","2", capacity = 3 )
+Graf_z_ulohy_4.add_edge("4","5", capacity = 6 )
+Graf_z_ulohy_4.add_edge("4","6", capacity = 3 )
+Graf_z_ulohy_4.add_edge("5","3", capacity = 3 )
+Graf_z_ulohy_4.add_edge("5","6", capacity = 5 )
+Graf_z_ulohy_4.add_edge("5","u", capacity = 5 )
+Graf_z_ulohy_4.add_edge("6","u", capacity = 10)
+
+
 
 #????????????????????????????????????????????????????????????????????
 
